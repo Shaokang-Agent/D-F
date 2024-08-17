@@ -78,7 +78,7 @@ class D_agent():
             param.data = policy_param.data
         return model
 
-    def upload_paremeters(self, omega_0_model):
+    def upload_parameters(self, omega_0_model):
         omega_up = self.new_model(omega_0_model)
         for local_param, fed_param in zip(self.eval_net.parameters(), omega_up.parameters()):
             fed_param.data = fed_param.data - self.args.alpha * self.args.lamdaw * (fed_param.data - local_param.data)
@@ -194,7 +194,7 @@ class F_agent:
             param.data = policy_param.data
         return model
 
-    def boardcast_omega_to_agents(self):
+    def broadcast_omega_to_agents(self):
         return self.new_model(self.eval_q)
 
     def download_update_parameters(self, omega_ups, omega_fair_model):

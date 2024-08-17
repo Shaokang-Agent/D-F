@@ -158,7 +158,7 @@ class PPOPolicyNetwork():
             update = tf.assign(self.tf_graph.get_tensor_by_name(name), local_parameters)
             self.session.run(update)
 
-    def board_paramters(self):
+    def broad_paramters(self):
         dict = ["W1:0", "W2:0", "W3:0", "B1:0", "B2:0", "B3:0"]
         parameters = {}
         for name in dict:

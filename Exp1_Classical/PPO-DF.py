@@ -187,8 +187,8 @@ for round_num in range(round):
 
                 if (i_episode + 1) % fed_epi == 0 and steps == T:
                     omega_ego_models = []
-                    omega_uti_model = FutiPi.board_paramters()
-                    omega_ega_model = FegaPi.board_paramters()
+                    omega_uti_model = FutiPi.broad_paramters()
+                    omega_ega_model = FegaPi.broad_paramters()
                 for i in range(n_agent):
                     DPi[i].update(ep_obss[i], ep_actions[i], D_all_ep_advantages[i])
                     if (i_episode + 1) % fed_epi == 0 and steps == T:
@@ -196,7 +196,7 @@ for round_num in range(round):
                         kwargs["Uti"] = omega_uti_model
                         kwargs["Ega"] = omega_ega_model
                         DPi[i].set_parameter(kwargs)
-                        omega_ego_models.append(DPi[i].board_paramters())
+                        omega_ego_models.append(DPi[i].broad_paramters())
                 if (i_episode + 1) % fed_epi == 0 and steps == T:
                     kwargs = {}
                     kwargs["Ego"] = omega_ego_models

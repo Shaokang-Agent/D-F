@@ -84,8 +84,8 @@ class Runner_df:
             if self.args.batch_size < self.buffer.__len__():
                 if epi % self.args.fed_epis == 0:
                     omega_ups = []
-                    omega_0_model = self.FAgent.boardcast_omega_to_agents()
-                    omega_fair_model = self.FFair.boardcast_omega_to_agents()
+                    omega_0_model = self.FAgent.broadcast_omega_to_agents()
+                    omega_fair_model = self.FFair.broadcast_omega_to_agents()
                 for i in range(self.args.num_agents):
                     sample = self.buffer.sample(min(self.buffer.__len__(), self.args.batch_size))
                     loss = self.DAgent[i].learn(sample, i)
@@ -94,7 +94,7 @@ class Runner_df:
                     if epi % self.args.fed_epis == 0:
                         self.DAgent[i].learn_regularization(omega_0_model, omega_fair_model)
                         self.DAgent[i].learn_regularization(omega_0_model, omega_0_model)
-                        omega_up = self.DAgent[i].upload_paremeters(omega_0_model)
+                        omega_up = self.DAgent[i].upload_parameters(omega_0_model)
                         omega_ups.append(omega_up)
                 sample = self.buffer.sample(min(self.buffer.__len__(), 32))
                 if epi % self.args.fed_epis == 0:
